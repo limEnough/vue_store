@@ -6,11 +6,15 @@
     "build": "vue-tsc --noEmit && vite build",
     "preview": "vite preview --port 5050",
     "typecheck": "vue-tsc --noEmit",
-    "lint": "eslint src/**/*.{vue,ts}"
+    "lint": "eslint src/**/*.{vue,ts}",
+    "tslint": "npx tsc --noEmit"
   },
   "dependencies": {
+    "dayjs": "^1.11.10",
     "pinia": "^2.0.9",
     "vue": "^3.2.26",
+    "vue-i18n": "^9.7.1",
+    "vue-lazyload": "^3.0.0",
     "vue-router": "^4.0.12"
   },
   "devDependencies": {
