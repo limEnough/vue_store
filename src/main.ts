@@ -21,9 +21,8 @@ export async function createApp() {
   // #region pinia 설정
   const isSSR = import.meta.env.SSR;
 
-  // csr일 경우 pinia state hydrate
   if (!isSSR) {
-    pinia.state.value = JSON.parse(window.__pinia);
+    console.log('csr일 경우 pinia state hydrate');
   }
 
   const commonStore = useCommonStore(pinia);
@@ -31,6 +30,7 @@ export async function createApp() {
 
   // #region i18n 설정
   const i18nDayjs = (await import(`./libraries/dayjs/i18n/${commonStore.lang}.ts`)).default();
+
   const i18n = await createCustomI18n({
     lang: commonStore.lang,
   });
@@ -44,7 +44,7 @@ export async function createApp() {
   dayjs.extend(updateLocale);
   dayjs.updateLocale(commonStore.lang, i18nDayjs);
   dayjs.locale(commonStore.lang);
-  
+
   app.use(pinia);
   app.use(router);
   app.use(i18n);
