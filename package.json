@@ -17,6 +17,7 @@
     "@vue/cli-plugin-eslint": "^5.0.8",
     "dayjs": "^1.11.10",
     "eslint-plugin-prettier": "^4.2.1",
+    "lodash-es": "^4.17.21",
     "pinia": "^2.1.7",
     "style-loader": "^3.3.2",
     "vue": "^3.2.26",
