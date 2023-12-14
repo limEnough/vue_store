@@ -1,15 +1,13 @@
 import { createSSRApp } from 'vue';
 import VueLazyLoad from 'vue-lazyload';
 import createCustomI18n from '@/plugins/custom-i18n';
-
 // dayjs
 import dayjs from 'dayjs';
 import localeData from 'dayjs/plugin/localeData';
 import localizedFormat from 'dayjs/plugin/localizedFormat';
 import updateLocale from 'dayjs/plugin/updateLocale';
-
-import { createPinia } from 'pinia'
-import App from './App.vue'
+import { createPinia } from 'pinia';
+import App from './App.vue';
 import { addRoutesByDevice, createRouter } from './router/index';
 import { useCommonStore } from './stores/common';
 
@@ -38,7 +36,7 @@ export async function createApp() {
 
   // 디바이스에 따라 동적으로 라우트 추가
   await addRoutesByDevice(commonStore.device, router);
-  
+
   dayjs.extend(localizedFormat);
   dayjs.extend(localeData);
   dayjs.extend(updateLocale);

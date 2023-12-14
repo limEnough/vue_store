@@ -10,7 +10,7 @@ interface State {
 
 export const useCommonStore = defineStore('common', () => {
   // #region device
-  const device = ref<Device>(DEVICE.DESKTOP);
+  const device = ref<Device>(DEVICE.MOBILE);
 
   const setDevice = (deviceType: Device) => {
     device.value = deviceType;
