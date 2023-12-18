@@ -1,0 +1,77 @@
+:root {
+  // Basic
+  --black: #2D2942;
+  --grey: #c7c7c7;
+  --white: #fff;
+
+  // Primary
+  --point: #F83A26;
+
+  // Secondary
+  --secondary: #FFC344;
+
+  // Border / Background
+  --border: #c6c9cf;
+  --dimblack: #000;
+  --bg-grey: #D1D4D7;
+
+  // State
+  --state-fail: var(--point);
+  --state-success: #22aa3d;
+
+  // Fonts
+  --noto: 'Notosans', sans-serif; //국문
+  --font_e: 'Roboto', var(--noto); //영문
+
+  // Box-shadow
+  --shadow-0: 0px 1px 4px 0px rgba(0, 0, 0, 0.1);
+  --shadow-2: 0px 4px 16px 0px rgba(0, 0, 0, 0.12);
+  --shadow-3: 0px 8px 16px 0px rgba(0, 0, 0, 0.16);
+}
+
+// #region Colors 
+// primary
+$pcolor: var(--point);
+
+// secondary
+$scolor: var(--secondary);
+
+// font
+$black: var(--black);
+$grey: var(--grey);
+
+// background
+$dimblack: var(--dimblack);
+$bg: var(--bg-grey);
+$border: var(--border);
+
+// state
+$fail: var(--state-fail);
+$success: var(--state-success);
+
+// colors map
+$colors: (
+  black: var(--basic),
+  white: var(--white),
+  grey: var(--grey),
+  red: var(--point),
+  yellow: var(--secondary),
+);
+// #endregion
+
+// #region Fonts
+$noto: var(--noto);
+// #endregion
+
+// #region Box-shadows
+$shadow0: var(--shadow-0);
+$shadow2: var(--shadow-2);
+$shadow3: var(--shadow-3);
+// #endregion
+
+// #region Devices
+$devices: (
+  desktop: 'desktop',
+  mobile: 'mobile',
+);
+// #endregion

@@ -1,0 +1,15 @@
+body {
+  border: 1px solid red($color: #000000)
+}
+
+
+//base
+@import "../base/reset.scss";
+
+//common
+@import "./common/layout.scss";
+@import "./common/icon.scss";
+@import "./common/common.scss";
+
+//plugins
+@import "/node_modules/swiper/swiper.min.css";
