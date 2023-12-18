@@ -1,10 +1,22 @@
 <template>
   <div class="login">
-    <Input v-model="userEmail">
+    <Input
+      v-model="userEmail"
+      :use-length-count="false"
+      placeholder="EMAIL"
+      is-card-type
+    >
       <template #title> EMAIL </template>
     </Input>
 
-    <Input v-model="userPassword">
+    <Input
+      v-model="userPassword"
+      :use-length-count="false"
+      placeholder="PASSWORD"
+      type="password"
+      visible
+      is-card-type
+    >
       <template #title> PASSWORD </template>
     </Input>
   </div>

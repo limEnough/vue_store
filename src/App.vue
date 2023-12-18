@@ -7,3 +7,8 @@
 
   appComposable();
 </script>
+
+<style lang="scss">
+  @import '@/styles/base/fonts.scss';
+  @import '@/styles/base/variables.scss';
+</style>

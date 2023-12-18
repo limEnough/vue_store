@@ -29,7 +29,7 @@ type FontWeights = '200' | '400' | '600' | '800' | 'bold';
 
 // #region input states
 const INPUT_STATES = {
-  DANGER: 'danger',
+  FAIL: 'fail',
   SUCCESS: 'success',
 } as const;
 

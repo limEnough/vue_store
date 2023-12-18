@@ -7,3 +7,7 @@
 
   const { currentComponent } = middlewareComposable();
 </script>
+
+<style lang="scss">
+  @import '@/styles/mobile/app.scss';
+</style>

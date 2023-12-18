@@ -12,9 +12,7 @@ interface Props {
   required: boolean;
   minlength: number | string;
   maxlength: number | string;
-  size: 's' | 'm' | 'l';
   clearable: boolean;
-  hasLabel: boolean;
   isSearch: boolean;
   name: string;
   state: InputStates;
@@ -23,6 +21,8 @@ interface Props {
   charset?: Charset;
   allowedRegex: RegExp | null;
   visible: boolean;
+  placeholder: string;
+  isCardType: boolean;
 }
 
 const emits: Emits[] = ['update:modelValue', 'search'];
@@ -33,6 +33,12 @@ const props = {
   /** 입력값 */
   modelValue: {
     type: [Number, String, Number, Symbol, null] as PropType<Props['modelValue']>,
+    default: defaultValue,
+    required: true as const,
+  },
+  /** 입력값 */
+  placeholder: {
+    type: String as PropType<Props['placeholder']>,
     default: defaultValue,
     required: true as const,
   },
@@ -56,11 +62,6 @@ const props = {
     type: [String, Number] as PropType<Props['maxlength']>,
     default: 20,
   },
-  /** 사이즈 */
-  size: {
-    type: String as PropType<Props['size']>,
-    default: 'm',
-  },
   /** input reset 사용 여부 */
   clearable: {
     type: Boolean as PropType<Props['clearable']>,
@@ -75,11 +76,6 @@ const props = {
   charset: {
     type: String as PropType<Props['charset']>,
     default: 'utf-8',
-  },
-  /** 라벨(타이틀) 사용 여부 */
-  hasLabel: {
-    type: Boolean as PropType<Props['hasLabel']>,
-    default: false,
   },
   /** 겸색 영역인지 여부 */
   isSearch: {
@@ -111,6 +107,11 @@ const props = {
     type: Boolean as PropType<Props['visible']>,
     default: false,
   },
+  /** 카드타입 여부 */
+  isCardType: {
+    type: Boolean as PropType<Props['isCardType']>,
+    default: false,
+  },
 };
 
 export default function inputComposables(emit: CustomEmit<Emits>, props: Props) {
@@ -126,7 +127,7 @@ export default function inputComposables(emit: CustomEmit<Emits>, props: Props) 
 
   const modelValueTextLength = computed(() => (props.modelValue ? props.modelValue.toString().length : 0));
 
-  const isDanger = computed(() => 'danger' === state.value);
+  const isFail = computed(() => 'fail' === state.value);
   const isSuccess = computed(() => 'success' === state.value);
   const isFocus = ref(false);
 
@@ -166,6 +167,14 @@ export default function inputComposables(emit: CustomEmit<Emits>, props: Props) 
 
     isFocus.value = false;
     inputElement.value?.focus();
+  };
+
+  const handleFocus = async () => {
+    // ..
+  };
+
+  const handleBlur = () => {
+    isFocus.value = false;
   };
 
   // #region vee-validate 내장 속성들
@@ -242,7 +251,7 @@ export default function inputComposables(emit: CustomEmit<Emits>, props: Props) 
   return {
     styleAttrs,
     inputBindings,
-    isDanger,
+    isFail,
     isSuccess,
     isFocus,
 
@@ -250,9 +259,12 @@ export default function inputComposables(emit: CustomEmit<Emits>, props: Props) 
 
     modelValueTextLength,
     getExposeProperties,
+
     handleInputClear,
     handleSearch,
     handleInputVisible,
+    handleFocus,
+    handleBlur,
 
     // field
     inputValue,

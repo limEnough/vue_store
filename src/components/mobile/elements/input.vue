@@ -1,90 +1,99 @@
 <template>
   <div
     :class="{
-      danger: isDanger,
+      fail: isFail,
       success: isSuccess,
       'search-mode': isSearch,
       required: required,
       clearable: clearable,
       visible: visible,
-      [`size--${size}`]: size,
+      'card-type': isCardType,
+      focused: isFocus && isCardType,
     }"
     class="input-component"
     v-bind="styleAttrs"
   >
-    <!-- 라벨 -->
-    <label
-      v-if="isFocus && hasLabel"
-      :for="`input-${name}`"
-    >
-      <slot name="title"></slot>
-    </label>
+    <!-- 라벨 박스 -->
+    <div class="input-component__top">
+      <!-- 1. 라벨 -->
+      <label
+        v-if="isFocus || (inputValue?.toString() as string).length"
+        :for="`input-${name}`"
+        class="input-component__top__label"
+      >
+        <slot name="title"></slot>
+      </label>
 
-    <!-- 박스 -->
-    <div>
-      <!-- 인풋 박스 -->
-      <div>
-        <!-- 1. 인풋 -->
-        <input
-          v-bind="inputBindings"
-          :value="inputValue"
-          :disabled="disabled"
-          :aria-label="$attrs.placeholder?.toString()"
-          :class="{
-            'is-danger': isDanger,
-          }"
-          ref="inputElement"
-          :id="`input-${name}`"
-          @input="handleInput"
-        />
-
-        <!-- 2. overlay (timer) -->
-        <slot name="overlay"></slot>
-
-        <!-- 3. 우측 아이콘 영역 -->
-        <slot name="button">
-          <div class="fb__input__icon">
-            <!-- clear 버튼 -->
-            <Button
-              v-show="clearable && 0 < modelValueTextLength"
-              icon="clear"
-              icon-only
-              @click.stop="handleInputClear()"
-            >
-              <span class="blind">clear</span>
-            </Button>
-
-            <!-- 비밀번호 보기 버튼 -->
-            <Button
-              v-if="inputType === 'password' && visible"
-              :class="{
-                show: controlType !== inputType,
-              }"
-              icon="visible"
-              icon-only
-              @click.stop="handleInputVisible()"
-            ></Button>
-          </div>
-        </slot>
-
-        <!-- 4. 검색 버튼 -->
-        <Button
-          v-if="isSearch"
-          type="button"
-          icon="search"
-          case="function"
-          icon-only
-          @click.stop="handleSearch(($event.target as HTMLInputElement).value)"
-        >
-          <span class="blind">search</span>
-        </Button>
-      </div>
-
-      <!-- 글자수 카운터 -->
+      <!-- 2. 글자수 카운터 -->
       <template v-if="useLengthCount && maxlength && !disabled">
         <!-- TODO: 카운트 컴포넌트 -->
-        <div class="input-component__count">0/0</div>
+        <div class="input-component__top__count">0/0</div>
       </template>
+    </div>
+
+    <!-- 인풋 박스 -->
+    <div class="input-component__bottom">
+      <!-- 1. 인풋 -->
+      <input
+        v-bind="inputBindings"
+        :value="inputValue"
+        :disabled="disabled"
+        :aria-label="$attrs.placeholder?.toString()"
+        :placeholder="isFocus ? '' : placeholder"
+        :type="controlType"
+        ref="inputElement"
+        :id="`input-${name}`"
+        class="input-component__bottom__input"
+        @input="handleInput"
+        @focus="(isFocus = true), handleFocus()"
+        @blur="handleBlur()"
+      />
+
+      <!-- 2. overlay (timer) -->
+      <slot
+        name="overlay"
+        class="input-component__bottom__overlay"
+      ></slot>
+
+      <!-- 3. 우측 버튼 영역 -->
+      <slot name="button">
+        <div class="input-component__bottom__button">
+          <!-- clear 버튼 -->
+          <Button
+            v-show="clearable && 0 < modelValueTextLength"
+            icon="clear"
+            class="button__clear"
+            icon-only
+            @click.stop="handleInputClear()"
+          >
+            <span class="blind">clear</span>
+          </Button>
+
+          <!-- 비밀번호 보기 버튼 -->
+          <Button
+            v-if="inputType === 'password' && visible && (inputValue?.toString() as string).length"
+            :class="{
+              show: controlType !== inputType,
+            }"
+            icon="visible"
+            class="button__visible"
+            icon-only
+            @click.stop="handleInputVisible()"
+          ></Button>
+
+          <!-- 4. 검색 버튼 -->
+          <Button
+            v-if="isSearch"
+            type="button"
+            icon="search"
+            class="button__search"
+            icon-only
+            @click.stop="handleSearch(($event.target as HTMLInputElement).value)"
+          >
+            <span class="blind">search</span>
+          </Button>
+        </div>
+      </slot>
     </div>
   </div>
 </template>
@@ -99,7 +108,7 @@
   const {
     styleAttrs,
     inputBindings,
-    isDanger,
+    isFail,
     isSuccess,
     isFocus,
 
@@ -107,9 +116,12 @@
 
     modelValueTextLength,
     getExposeProperties,
+
     handleInputClear,
     handleSearch,
     handleInputVisible,
+    handleFocus,
+    handleBlur,
 
     // field
     inputValue,
