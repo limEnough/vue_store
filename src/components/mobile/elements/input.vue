@@ -17,11 +17,11 @@
     <div class="input-component__top">
       <!-- 1. 라벨 -->
       <label
-        v-if="isFocus || (inputValue?.toString() as string).length"
+        v-if="!noLabel && (isFocus || (inputValue?.toString() as string).length)"
         :for="`input-${name}`"
         class="input-component__top__label"
       >
-        <slot name="title"></slot>
+        <slot name="title">{{ label }}</slot>
       </label>
 
       <!-- 2. 글자수 카운터 -->
@@ -38,8 +38,8 @@
         v-bind="inputBindings"
         :value="inputValue"
         :disabled="disabled"
-        :aria-label="$attrs.placeholder?.toString()"
-        :placeholder="isFocus ? '' : placeholder"
+        :aria-label="label?.toString()"
+        :placeholder="isFocus ? '' : label"
         :type="controlType"
         ref="inputElement"
         :id="`input-${name}`"
@@ -62,11 +62,12 @@
           <Button
             v-show="clearable && 0 < modelValueTextLength"
             icon="clear"
-            class="button__clear"
             icon-only
             @click.stop="handleInputClear()"
           >
-            <span class="blind">clear</span>
+            <template #text>
+              <span class="blind">clear</span>
+            </template>
           </Button>
 
           <!-- 비밀번호 보기 버튼 -->
@@ -76,7 +77,6 @@
               show: controlType !== inputType,
             }"
             icon="visible"
-            class="button__visible"
             icon-only
             @click.stop="handleInputVisible()"
           ></Button>

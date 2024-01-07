@@ -1,17 +1,16 @@
-@import '@/styles/base/mixins.scss';
 
 .input-component {
-  padding: rem(10px 12px);
+  padding: rem(5px 8px);
 
   &:not(:first-of-type) {
-    margin-top: rem(10px);
+    margin-top: rem(8px);
   }
 
   &.card-type {
-    border-radius: rem(8px);
+    border-radius: rem(3px);
 
     &.focused {
-      box-shadow: rem(6px 6px 12px) $bg;
+      box-shadow: rem(3px 3px 6px) $shadow;
     }
   }
   
@@ -60,10 +59,10 @@
       border: none;
       outline: none;
       flex: rem(120px);
-      @include makefontCss($black, rem(10px), 800, rem(10px), $noto);
+      @include makefontCss($black, rem(8px), 800, rem(8px), $noto);
 
       &::placeholder {
-        @include makefontCss($grey, rem(10px), 400, rem(10px), $noto);
+        @include makefontCss($grey, rem(8px), 400, rem(8px), $noto);
       }
     }
 
@@ -75,24 +74,6 @@
       display: flex;
       justify-content: center;
       align-items: center;
-
-      .button {
-        &__clear {
-  
-        }
-  
-        &__visible {
-          @include mobileImage(rem(12px), rem(12px), 'member', 'icon-password--off.svg');
-
-          &.show {
-            background-image: url(src('mobile', 'member', 'icon-password--on.svg'));
-          }
-        }
-  
-        &__search {
-  
-        }
-      }
     }
   }
   // #endregion

@@ -21,8 +21,9 @@ interface Props {
   charset?: Charset;
   allowedRegex: RegExp | null;
   visible: boolean;
-  placeholder: string;
+  label: string;
   isCardType: boolean;
+  noLabel: boolean;
 }
 
 const emits: Emits[] = ['update:modelValue', 'search'];
@@ -37,8 +38,8 @@ const props = {
     required: true as const,
   },
   /** 입력값 */
-  placeholder: {
-    type: String as PropType<Props['placeholder']>,
+  label: {
+    type: String as PropType<Props['label']>,
     default: defaultValue,
     required: true as const,
   },
@@ -112,10 +113,15 @@ const props = {
     type: Boolean as PropType<Props['isCardType']>,
     default: false,
   },
+  /** 라벨 사용 안함 여부 */
+  noLabel: {
+    type: Boolean as PropType<Props['noLabel']>,
+    default: false,
+  },
 };
 
 export default function inputComposables(emit: CustomEmit<Emits>, props: Props) {
-  const { countType, maxlength, charset, state } = toRefs(props);
+  const { countType, maxlength, state } = toRefs(props);
 
   const attrs = useAttrs();
 
