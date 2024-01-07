@@ -1,23 +1,20 @@
 :root {
   // Basic
-  --black: #2D2942;
-  --grey: #c7c7c7;
+  --black: ##111;
+  --grey: #ADADAD;
   --white: #fff;
 
   // Primary
-  --point: #F83A26;
-
-  // Secondary
-  --secondary: #FFC344;
+  --point: #01B187;
 
   // Border / Background
   --border: #c6c9cf;
   --dimblack: #000;
-  --bg-grey: #D1D4D7;
+  --bg-grey: #ebebeb;
+  --bg-shadow: #D1D4D7;
 
   // State
   --state-fail: var(--point);
-  --state-success: #22aa3d;
 
   // Fonts
   --noto: 'Notosans', sans-serif; //국문
@@ -33,16 +30,15 @@
 // primary
 $pcolor: var(--point);
 
-// secondary
-$scolor: var(--secondary);
-
 // font
 $black: var(--black);
 $grey: var(--grey);
+$white: var(--white);
 
 // background
 $dimblack: var(--dimblack);
 $bg: var(--bg-grey);
+$shadow: var(--bg-shadow);
 $border: var(--border);
 
 // state
@@ -54,13 +50,13 @@ $colors: (
   black: var(--basic),
   white: var(--white),
   grey: var(--grey),
-  red: var(--point),
-  yellow: var(--secondary),
+  green: var(--point),
 );
 // #endregion
 
 // #region Fonts
 $noto: var(--noto);
+$font_e: var(--font_e);
 // #endregion
 
 // #region Box-shadows
