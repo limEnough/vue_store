@@ -14,9 +14,7 @@
       ]"
       class="button-component__text"
     >
-      <span>
-        <slot name="text"></slot>
-      </span>
+      <slot></slot>
     </span>
   </button>
 </template>
@@ -29,4 +27,6 @@
   const { buttonClasses } = buttonComposables(props);
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+  @import '@/styles/mobile/components/elements/button.scss';
+</style>

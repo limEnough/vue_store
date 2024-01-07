@@ -65,10 +65,6 @@ export default function buttonComposables(props: Props) {
       {
         normal: 'case--normal',
         process: 'case--process',
-        success: 'case--success',
-        action: 'case--action',
-        delete: 'case--delete',
-        edit: 'case--edit',
       },
       caseProp.value,
     );
