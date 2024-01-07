@@ -1,10 +1,6 @@
-body {
-  border: 1px solid red($color: #000000)
-}
-
-
 //base
 @import "../base/reset.scss";
+@import "../base/basic.scss";
 
 //common
 @import "./common/layout.scss";
